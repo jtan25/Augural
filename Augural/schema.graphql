@@ -1,0 +1,265 @@
+type MarketCreated @entity {
+  id: ID!
+  topic: Bytes! # bytes32
+  description: String! # string
+  extraInfo: String! # string
+  universe: Bytes! # address
+  market: Bytes! # address
+  marketCreator: Bytes! # address
+  outcomes: [Bytes]! # bytes32[]
+  marketCreationFee: BigInt! # uint256
+  minPrice: BigInt! # int256
+  maxPrice: BigInt! # int256
+  marketType: Int! # uint8
+}
+
+type InitialReportSubmitted @entity {
+  id: ID!
+  universe: Bytes! # address
+  reporter: Bytes! # address
+  market: Bytes! # address
+  amountStaked: BigInt! # uint256
+  isDesignatedReporter: Boolean! # bool
+  payoutNumerators: [BigInt]! # uint256[]
+  invalid: Boolean! # bool
+}
+
+type DisputeCrowdsourcerCreated @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  disputeCrowdsourcer: Bytes! # address
+  payoutNumerators: [BigInt]! # uint256[]
+  size: BigInt! # uint256
+  invalid: Boolean! # bool
+}
+
+type DisputeCrowdsourcerContribution @entity {
+  id: ID!
+  universe: Bytes! # address
+  reporter: Bytes! # address
+  market: Bytes! # address
+  disputeCrowdsourcer: Bytes! # address
+  amountStaked: BigInt! # uint256
+}
+
+type DisputeCrowdsourcerCompleted @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  disputeCrowdsourcer: Bytes! # address
+}
+
+type InitialReporterRedeemed @entity {
+  id: ID!
+  universe: Bytes! # address
+  reporter: Bytes! # address
+  market: Bytes! # address
+  amountRedeemed: BigInt! # uint256
+  repReceived: BigInt! # uint256
+  reportingFeesReceived: BigInt! # uint256
+  payoutNumerators: [BigInt]! # uint256[]
+}
+
+type DisputeCrowdsourcerRedeemed @entity {
+  id: ID!
+  universe: Bytes! # address
+  reporter: Bytes! # address
+  market: Bytes! # address
+  disputeCrowdsourcer: Bytes! # address
+  amountRedeemed: BigInt! # uint256
+  repReceived: BigInt! # uint256
+  reportingFeesReceived: BigInt! # uint256
+  payoutNumerators: [BigInt]! # uint256[]
+}
+
+type ReportingParticipantDisavowed @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  reportingParticipant: Bytes! # address
+}
+
+type MarketParticipantsDisavowed @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+}
+
+type FeeWindowRedeemed @entity {
+  id: ID!
+  universe: Bytes! # address
+  reporter: Bytes! # address
+  feeWindow: Bytes! # address
+  amountRedeemed: BigInt! # uint256
+  reportingFeesReceived: BigInt! # uint256
+}
+
+type MarketFinalized @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+}
+
+type MarketMigrated @entity {
+  id: ID!
+  market: Bytes! # address
+  originalUniverse: Bytes! # address
+  newUniverse: Bytes! # address
+}
+
+type UniverseForked @entity {
+  id: ID!
+  universe: Bytes! # address
+}
+
+type UniverseCreated @entity {
+  id: ID!
+  parentUniverse: Bytes! # address
+  childUniverse: Bytes! # address
+  payoutNumerators: [BigInt]! # uint256[]
+  invalid: Boolean! # bool
+}
+
+type OrderCanceled @entity {
+  id: ID!
+  universe: Bytes! # address
+  shareToken: Bytes! # address
+  sender: Bytes! # address
+  orderId: Bytes! # bytes32
+  orderType: Int! # uint8
+  tokenRefund: BigInt! # uint256
+  sharesRefund: BigInt! # uint256
+}
+
+type OrderCreated @entity {
+  id: ID!
+  orderType: Int! # uint8
+  amount: BigInt! # uint256
+  price: BigInt! # uint256
+  creator: Bytes! # address
+  moneyEscrowed: BigInt! # uint256
+  sharesEscrowed: BigInt! # uint256
+  tradeGroupId: Bytes! # bytes32
+  orderId: Bytes! # bytes32
+  universe: Bytes! # address
+  shareToken: Bytes! # address
+}
+
+type OrderFilled @entity {
+  id: ID!
+  universe: Bytes! # address
+  shareToken: Bytes! # address
+  filler: Bytes! # address
+  orderId: Bytes! # bytes32
+  numCreatorShares: BigInt! # uint256
+  numCreatorTokens: BigInt! # uint256
+  numFillerShares: BigInt! # uint256
+  numFillerTokens: BigInt! # uint256
+  marketCreatorFees: BigInt! # uint256
+  reporterFees: BigInt! # uint256
+  amountFilled: BigInt! # uint256
+  tradeGroupId: Bytes! # bytes32
+}
+
+type CompleteSetsPurchased @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  account: Bytes! # address
+  numCompleteSets: BigInt! # uint256
+}
+
+type CompleteSetsSold @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  account: Bytes! # address
+  numCompleteSets: BigInt! # uint256
+}
+
+type TradingProceedsClaimed @entity {
+  id: ID!
+  universe: Bytes! # address
+  shareToken: Bytes! # address
+  sender: Bytes! # address
+  market: Bytes! # address
+  numShares: BigInt! # uint256
+  numPayoutTokens: BigInt! # uint256
+  finalTokenBalance: BigInt! # uint256
+}
+
+type TokensTransferred @entity {
+  id: ID!
+  universe: Bytes! # address
+  token: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  tokenType: Int! # uint8
+  market: Bytes! # address
+}
+
+type TokensMinted @entity {
+  id: ID!
+  universe: Bytes! # address
+  token: Bytes! # address
+  target: Bytes! # address
+  amount: BigInt! # uint256
+  tokenType: Int! # uint8
+  market: Bytes! # address
+}
+
+type TokensBurned @entity {
+  id: ID!
+  universe: Bytes! # address
+  token: Bytes! # address
+  target: Bytes! # address
+  amount: BigInt! # uint256
+  tokenType: Int! # uint8
+  market: Bytes! # address
+}
+
+type FeeWindowCreated @entity {
+  id: ID!
+  universe: Bytes! # address
+  feeWindow: Bytes! # address
+  startTime: BigInt! # uint256
+  endTime: BigInt! # uint256
+  id: BigInt! # uint256
+}
+
+type InitialReporterTransferred @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+}
+
+type MarketTransferred @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+}
+
+type MarketMailboxTransferred @entity {
+  id: ID!
+  universe: Bytes! # address
+  market: Bytes! # address
+  mailbox: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+}
+
+type EscapeHatchChanged @entity {
+  id: ID!
+  isOn: Boolean! # bool
+}
+
+type TimestampSet @entity {
+  id: ID!
+  newTimestamp: BigInt! # uint256
+}

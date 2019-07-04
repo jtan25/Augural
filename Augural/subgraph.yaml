@@ -1,0 +1,107 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: mainnet
+    source:
+      address: "0x75228dce4d82566d93068a8d5d49435216551599"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - MarketCreated
+        - InitialReportSubmitted
+        - DisputeCrowdsourcerCreated
+        - DisputeCrowdsourcerContribution
+        - DisputeCrowdsourcerCompleted
+        - InitialReporterRedeemed
+        - DisputeCrowdsourcerRedeemed
+        - ReportingParticipantDisavowed
+        - MarketParticipantsDisavowed
+        - FeeWindowRedeemed
+        - MarketFinalized
+        - MarketMigrated
+        - UniverseForked
+        - UniverseCreated
+        - OrderCanceled
+        - OrderCreated
+        - OrderFilled
+        - CompleteSetsPurchased
+        - CompleteSetsSold
+        - TradingProceedsClaimed
+        - TokensTransferred
+        - TokensMinted
+        - TokensBurned
+        - FeeWindowCreated
+        - InitialReporterTransferred
+        - MarketTransferred
+        - MarketMailboxTransferred
+        - EscapeHatchChanged
+        - TimestampSet
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: MarketCreated(indexed bytes32,string,string,indexed address,address,indexed address,bytes32[],uint256,int256,int256,uint8)
+          handler: handleMarketCreated
+        - event: InitialReportSubmitted(indexed address,indexed address,indexed address,uint256,bool,uint256[],bool)
+          handler: handleInitialReportSubmitted
+        - event: DisputeCrowdsourcerCreated(indexed address,indexed address,address,uint256[],uint256,bool)
+          handler: handleDisputeCrowdsourcerCreated
+        - event: DisputeCrowdsourcerContribution(indexed address,indexed address,indexed address,address,uint256)
+          handler: handleDisputeCrowdsourcerContribution
+        - event: DisputeCrowdsourcerCompleted(indexed address,indexed address,address)
+          handler: handleDisputeCrowdsourcerCompleted
+        - event: InitialReporterRedeemed(indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256[])
+          handler: handleInitialReporterRedeemed
+        - event: DisputeCrowdsourcerRedeemed(indexed address,indexed address,indexed address,address,uint256,uint256,uint256,uint256[])
+          handler: handleDisputeCrowdsourcerRedeemed
+        - event: ReportingParticipantDisavowed(indexed address,indexed address,address)
+          handler: handleReportingParticipantDisavowed
+        - event: MarketParticipantsDisavowed(indexed address,indexed address)
+          handler: handleMarketParticipantsDisavowed
+        - event: FeeWindowRedeemed(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleFeeWindowRedeemed
+        - event: MarketFinalized(indexed address,indexed address)
+          handler: handleMarketFinalized
+        - event: MarketMigrated(indexed address,indexed address,indexed address)
+          handler: handleMarketMigrated
+        - event: UniverseForked(indexed address)
+          handler: handleUniverseForked
+        - event: UniverseCreated(indexed address,indexed address,uint256[],bool)
+          handler: handleUniverseCreated
+        - event: OrderCanceled(indexed address,indexed address,indexed address,bytes32,uint8,uint256,uint256)
+          handler: handleOrderCanceled
+        - event: OrderCreated(uint8,uint256,uint256,indexed address,uint256,uint256,bytes32,bytes32,indexed address,indexed address)
+          handler: handleOrderCreated
+        - event: OrderFilled(indexed address,indexed address,address,bytes32,uint256,uint256,uint256,uint256,uint256,uint256,uint256,bytes32)
+          handler: handleOrderFilled
+        - event: CompleteSetsPurchased(indexed address,indexed address,indexed address,uint256)
+          handler: handleCompleteSetsPurchased
+        - event: CompleteSetsSold(indexed address,indexed address,indexed address,uint256)
+          handler: handleCompleteSetsSold
+        - event: TradingProceedsClaimed(indexed address,indexed address,indexed address,address,uint256,uint256,uint256)
+          handler: handleTradingProceedsClaimed
+        - event: TokensTransferred(indexed address,indexed address,indexed address,address,uint256,uint8,address)
+          handler: handleTokensTransferred
+        - event: TokensMinted(indexed address,indexed address,indexed address,uint256,uint8,address)
+          handler: handleTokensMinted
+        - event: TokensBurned(indexed address,indexed address,indexed address,uint256,uint8,address)
+          handler: handleTokensBurned
+        - event: FeeWindowCreated(indexed address,address,uint256,uint256,uint256)
+          handler: handleFeeWindowCreated
+        - event: InitialReporterTransferred(indexed address,indexed address,address,address)
+          handler: handleInitialReporterTransferred
+        - event: MarketTransferred(indexed address,indexed address,address,address)
+          handler: handleMarketTransferred
+        - event: MarketMailboxTransferred(indexed address,indexed address,indexed address,address,address)
+          handler: handleMarketMailboxTransferred
+        - event: EscapeHatchChanged(bool)
+          handler: handleEscapeHatchChanged
+        - event: TimestampSet(uint256)
+          handler: handleTimestampSet
+      file: ./src/mapping.ts
