@@ -20,7 +20,7 @@ type Market @entity {
   # For market stats, just ideas
   # (UPDATE ON FILLORDER EVENT)
   orders: Int! # uint8 — keep track of order count
-  totalBig: BigInt! # uint256 — keep track of total bid
+  totalBid: BigInt! # uint256 — keep track of total bid
 }
 
 #################################

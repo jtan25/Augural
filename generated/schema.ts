@@ -12,6 +12,163 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
+export class Market extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Market entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Market entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Market", id.toString(), this);
+  }
+
+  static load(id: string): Market | null {
+    return store.get("Market", id) as Market | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get topic(): Bytes {
+    let value = this.get("topic");
+    return value.toBytes();
+  }
+
+  set topic(value: Bytes) {
+    this.set("topic", Value.fromBytes(value));
+  }
+
+  get description(): string {
+    let value = this.get("description");
+    return value.toString();
+  }
+
+  set description(value: string) {
+    this.set("description", Value.fromString(value));
+  }
+
+  get extraInfo(): string {
+    let value = this.get("extraInfo");
+    return value.toString();
+  }
+
+  set extraInfo(value: string) {
+    this.set("extraInfo", Value.fromString(value));
+  }
+
+  get universe(): Bytes {
+    let value = this.get("universe");
+    return value.toBytes();
+  }
+
+  set universe(value: Bytes) {
+    this.set("universe", Value.fromBytes(value));
+  }
+
+  get market(): Bytes {
+    let value = this.get("market");
+    return value.toBytes();
+  }
+
+  set market(value: Bytes) {
+    this.set("market", Value.fromBytes(value));
+  }
+
+  get marketCreator(): Bytes {
+    let value = this.get("marketCreator");
+    return value.toBytes();
+  }
+
+  set marketCreator(value: Bytes) {
+    this.set("marketCreator", Value.fromBytes(value));
+  }
+
+  get outcomes(): Array<Bytes | null> {
+    let value = this.get("outcomes");
+    return value.toBytesArray();
+  }
+
+  set outcomes(value: Array<Bytes | null>) {
+    this.set("outcomes", Value.fromBytesArray(value));
+  }
+
+  get marketCreationFee(): BigInt {
+    let value = this.get("marketCreationFee");
+    return value.toBigInt();
+  }
+
+  set marketCreationFee(value: BigInt) {
+    this.set("marketCreationFee", Value.fromBigInt(value));
+  }
+
+  get minPrice(): BigInt {
+    let value = this.get("minPrice");
+    return value.toBigInt();
+  }
+
+  set minPrice(value: BigInt) {
+    this.set("minPrice", Value.fromBigInt(value));
+  }
+
+  get maxPrice(): BigInt {
+    let value = this.get("maxPrice");
+    return value.toBigInt();
+  }
+
+  set maxPrice(value: BigInt) {
+    this.set("maxPrice", Value.fromBigInt(value));
+  }
+
+  get marketType(): i32 {
+    let value = this.get("marketType");
+    return value.toI32();
+  }
+
+  set marketType(value: i32) {
+    this.set("marketType", Value.fromI32(value));
+  }
+
+  get keywords(): Array<string | null> {
+    let value = this.get("keywords");
+    return value.toStringArray();
+  }
+
+  set keywords(value: Array<string | null>) {
+    this.set("keywords", Value.fromStringArray(value));
+  }
+
+  get orders(): i32 {
+    let value = this.get("orders");
+    return value.toI32();
+  }
+
+  set orders(value: i32) {
+    this.set("orders", Value.fromI32(value));
+  }
+
+  get totalBid(): BigInt {
+    let value = this.get("totalBid");
+    return value.toBigInt();
+  }
+
+  set totalBid(value: BigInt) {
+    this.set("totalBid", Value.fromBigInt(value));
+  }
+}
+
 export class MarketCreated extends Entity {
   constructor(id: string) {
     super();
