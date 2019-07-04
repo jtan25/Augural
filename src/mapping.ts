@@ -256,6 +256,7 @@ export function handleOrderCanceled(event: OrderCanceledEvent): void {
   entity.save()
 }
 
+// Update a given market object with new order
 export function handleOrderCreated(event: OrderCreatedEvent): void {
   let entity = new OrderCreated(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
